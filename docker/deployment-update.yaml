@@ -1,0 +1,19 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: micro-test-app
+spec:
+  selector:
+    matchLabels:
+      app: micro-test
+  replicas: 10
+  template:
+    metadata:
+      labels:
+        app: micro-test
+    spec:
+      containers:
+      - name: micro-test 
+        image: micro-test:3.2 # Update the version of micro-test to 3.2
+        ports:
+        - containerPort: 8000
