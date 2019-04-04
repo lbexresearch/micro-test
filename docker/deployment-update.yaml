@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: micro-test 
-        image: micro-test:3.2 # Update the version of micro-test to 3.2
+        image: micro-test:3.4 # Update the version of micro-test to 3.2
         ports:
         - containerPort: 8000

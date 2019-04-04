@@ -5,47 +5,63 @@ Test micriservices on a kubernetes cluster.
 
 ## Build Container
 
-Simple rest container, using python3 hug module to implement 
+Simple rest container, using python3 hug module to implement some limited functionallity. 
 
-[ ] API Versions
-[ ] Service Versions
-[ ] Uptime
+    [x] API Versions
+    [x] Service Versions
+    [x] Uptime
+
+
+Python file [docker/service.py](docker/service.py)  
+[Dockerfile](docker/Dockerfile) for building the container image, builds on a Python3 image.
+
+## Build locally for testing
 
 
 ```
 docker build -t micro-test:3.2 -t micro-test:latest .
-```
-
-```
 docker image ls
 ```
 
-
+### Run Container in Docker
 Start the container
-
 ```
 docker run -p 8000:8000 micro-test
 ```
 
-Connect to : http://localhost:8000/v2/version
+Connect to : [http://localhost:8000/v2/version](http://localhost:8000/v2/version)
 
 
-Store image in registry.
+## Deploy Container to minikube from local repository
 
-### Deploy Container from local repository
-
+It is possible to store the container image in the local minikube registry.
 ```
 minikube ssh
 docker images
 ```
 
-
+Build docker image and store it in minicubes registry
 ```
 eval $(minikube docker-env)
+docker build -t micro-test:3.2 -t micro-test:latest .
+```
+
+
+It is possible to run it like this, but it's better to do a Deployment as described below.
+```
 kubectl run --image=micro-test:latest micro-test-app --port=8000 --image-pull-policy=Never
 ```
 
-Expose Container
+
+### Deploy Container
+
+The file [deployment-update.yaml](docker/deployment-update.yaml) specifies the deployment.
+```
+kubectl apply -f deployment-update.yaml
+kubectl describe deployment micro-test-app
+```
+
+Expose Container so we can connect to it.
 ```
 kubectl expose deployment micro-test-app --type=LoadBalancer --port=8000 --target-port=8000
 ```
@@ -75,38 +91,38 @@ sudo ip route add 10.106.54.0/24 via $(minikube ip)
 ```
 
 Then connect to the micro service :
+
+[http://10.96.252.238:8000/v2/version](http://10.96.252.238:8000/v2/version)
+
+
+
+### Rolling Upgrade
+
+Update service.py route /version to version 3.4
 ```
-http://10.106.54.189:8000/v2/uptime
-```
-
-
-
-Rolling Upgrade
-```
-docker build -t micro-test:v2 .
-
-```
-
-
-
-
-## Create Pod
-
-
-### [Pull Local Image](https://stackoverflow.com/questions/40144138/pull-a-local-image-to-run-a-pod-in-kubernetes)
-
-```
-eval $(minikube docker-env)
+docker build -t micro-test:3.4 -t micro-test:latest .
 ```
 
-
+Verify that the new image is visable in the minikube container repository
 ```
-minikube start --insecure-registry
+minicube ssh
+docker images
 ```
 
+Update the [deployment-update.yaml](docker/deployment-update.yaml) with the new version number.
+```
+kubectl apply -f deployment-update.yaml
+```
 
-### Persistent Storage
+Then connect to the micro service :
 
-### Authentication
+   [http://10.96.252.238:8000/v2/version](http://10.96.252.238:8000/v2/version)  
+   [http://10.96.252.238:8000/v2/uptime](http://10.96.252.238:8000/v2/uptime)
 
-### Scaling
+
+
+### Referenses
+
+[Running Local Docker Images in Kubernetes](https://blogmilind.wordpress.com/2018/01/30/running-local-docker-images-in-kubernetes/)
+
+

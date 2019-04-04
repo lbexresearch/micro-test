@@ -45,7 +45,7 @@ def platform():
 @hug.get('/version', versions=range(1,3))
 @hug.local()
 def version():
-    return {'version': 3.2, 'took': 0}
+    return {'version': 3.4, 'took': 0}
 
 @hug.get('/crash', versions=[1,2])
 @hug.local()
