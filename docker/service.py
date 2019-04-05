@@ -42,10 +42,10 @@ def uptime():
 def platform():
     return {'platform': platform.platform(), 'took': 0}
 
-@hug.get('/version', versions=range(1,3))
+@hug.get('/version')
 @hug.local()
 def version():
-    return {'version': 3.4, 'took': 0}
+    return {'version': 3.5, 'took': 0}
 
 @hug.get('/crash', versions=[1,2])
 @hug.local()
