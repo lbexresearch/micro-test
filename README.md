@@ -1,7 +1,7 @@
 # Micro Test
 
-Test micriservices on a kubernetes cluster.
-
+Test microservices on a kubernetes cluster.
+Create a OpenShift pipeline.
 
 ## Build Container
 
