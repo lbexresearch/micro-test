@@ -34,7 +34,7 @@ parameters:
   name: SOURCE_REPOSITORY_URL
   required: true
   value: https://github.com/lbexresearch/micro-test.git
-- description: Maximum amount of memory the Node.js container can use.
+- description: Maximum amount of memory the micro-test container can use.
   displayName: Memory Limit
   name: MEMORY_LIMIT
   required: true
@@ -157,7 +157,7 @@ objects:
         kind: ImageStreamTag
         name: ${NAME}:latest
     postCommit:
-      script: python --version
+      script: python --version 2>/dev/null
     source:
       contextDir: ${CONTEXT_DIR}
       git:
