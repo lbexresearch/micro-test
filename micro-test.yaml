@@ -157,7 +157,7 @@ objects:
         kind: ImageStreamTag
         name: ${NAME}:latest
     postCommit:
-      script: npm test
+      script: python --version
     source:
       contextDir: ${CONTEXT_DIR}
       git:
@@ -166,12 +166,9 @@ objects:
       type: Git
     strategy:
       sourceStrategy:
-        env:
-        - name: NPM_MIRROR
-          value: ${NPM_MIRROR}
         from:
           kind: ImageStreamTag
-          name: nodejs:4
+          name: python:3.7
           namespace: ${NAMESPACE}
       type: Source
     triggers:
