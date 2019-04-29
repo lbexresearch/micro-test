@@ -74,8 +74,8 @@ objects:
     annotations:
       pipeline.alpha.openshift.io/uses: '[{"name": "${NAME}", "namespace": "", "kind": "DeploymentConfig"}]'
     labels:
-      name: sample-pipeline
-    name: sample-pipeline
+      name: micro-test-pipeline
+    name: micro-test-pipeline
   spec:
     strategy:
       jenkinsPipelineStrategy:
@@ -118,10 +118,11 @@ objects:
     - generic:
         secret: secret101
       type: Generic
-
 - apiVersion: v1
   kind: Service
+  metadata:
     name: ${NAME}
+  name: ${NAME}
   spec:
     ports:
     - name: web
