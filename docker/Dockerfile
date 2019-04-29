@@ -1,6 +1,6 @@
 FROM python:3
 MAINTAINER Magnus Bystrom <mbystrom@gmail.com>
-LABEL version="0.0.1"
+LABEL version="0.0.2"
 
 WORKDIR /usr/src/app
 
