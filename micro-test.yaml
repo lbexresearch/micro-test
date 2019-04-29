@@ -156,8 +156,6 @@ objects:
       to:
         kind: ImageStreamTag
         name: ${NAME}:latest
-    postCommit:
-      script: echo "PostCommit"
     source:
       contextDir: ${CONTEXT_DIR}
       git:
