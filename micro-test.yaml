@@ -157,7 +157,7 @@ objects:
         kind: ImageStreamTag
         name: ${NAME}:latest
     postCommit:
-      script: python --version 2>/dev/null
+      script: echo "PostCommit"
     source:
       contextDir: ${CONTEXT_DIR}
       git:
