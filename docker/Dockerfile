@@ -9,5 +9,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install hug -U
 
 COPY . .
-
+EXPOSE 8080
 CMD [ "hug", "-f", "./service.py" ]
