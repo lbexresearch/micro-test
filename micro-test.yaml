@@ -168,7 +168,7 @@ objects:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          name: python:3.7
+          name: python:latest
           namespace: ${NAMESPACE}
       type: Source
     triggers:
@@ -207,7 +207,7 @@ objects:
               port: 8080
             initialDelaySeconds: 30
             timeoutSeconds: 3
-          name: nodejs-mongodb-example
+          name: micro-test-uptime
           ports:
           - containerPort: 8080
           readinessProbe:
