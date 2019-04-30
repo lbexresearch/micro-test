@@ -10,4 +10,4 @@ RUN pip3 install hug -U
 
 COPY . .
 EXPOSE 8080
-CMD [ "hug", "-f", "./service.py" ]
+CMD [ "hug", "-p", "8080", "-f", "./service.py" ]
