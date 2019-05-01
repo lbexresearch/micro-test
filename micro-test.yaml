@@ -25,7 +25,7 @@ parameters:
   name: NAME
   required: true
   value: micro-test 
-- description: The exposed hostname that will route to the Node.js service, if left
+- description: The exposed hostname that will route to the python service, if left
     blank a value will be defaulted.
   displayName: Application Hostname
   name: APPLICATION_DOMAIN
@@ -62,7 +62,7 @@ parameters:
   from: '[a-zA-Z0-9]{40}'
   generate: expression
   name: GENERIC_WEBHOOK_SECRET
-- description: The OpenShift Namespace where the NodeJS and MongoDB ImageStreams reside.
+- description: The OpenShift Namespace where the micro-test ImageStreams reside.
   displayName: Namespace
   name: NAMESPACE
   required: true
