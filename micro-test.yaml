@@ -102,6 +102,13 @@ objects:
                         }
                       }
                     }
+                    stage('tag') {
+                      openshift.withCluster() {
+                        openshift.withProject() {
+                          openshift.tag("${templateName}:latest", "${templateName}-staging:latest") 
+                        }
+                      }
+                    }
                   }
              }
           } catch (err) {
