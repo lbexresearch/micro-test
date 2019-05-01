@@ -80,6 +80,7 @@ objects:
     strategy:
       jenkinsPipelineStrategy:
         jenkinsfile: |-
+          def templateName = 'micro-test' 
           try {
              timeout(time: 20, unit: 'MINUTES') {
                 node('master') {
