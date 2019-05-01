@@ -82,7 +82,7 @@ objects:
         jenkinsfile: |-
           try {
              timeout(time: 20, unit: 'MINUTES') {
-                node('nodejs') {
+                node('master') {
                     stage('build') {
                       openshift.withCluster() {
                          openshift.withProject() {
