@@ -94,18 +94,18 @@ objects:
                          }  
                       }
                     }
+                    stage('tag') {
+                      openshift.withCluster() {
+                        openshift.withProject() {
+                          openshift.tag("${templateName}:latest", "${templateName}-staging:latest")
+                        }
+                      }
+                    }
                     stage('deploy') {
                       openshift.withCluster() {
                         openshift.withProject() {
                           def dc = openshift.selector('dc', '${NAME}')
                           dc.rollout().latest()
-                        }
-                      }
-                    }
-                    stage('tag') {
-                      openshift.withCluster() {
-                        openshift.withProject() {
-                          openshift.tag("${templateName}:latest", "${templateName}-staging:latest") 
                         }
                       }
                     }
