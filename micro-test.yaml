@@ -105,7 +105,7 @@ objects:
                       openshift.withCluster() {
                         openshift.withProject() {
                           def dc = openshift.selector('dc', '${NAME}')
-                          dc.rollout().latest()
+                          dc.rollout()
                         }
                       }
                     }
