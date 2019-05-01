@@ -91,7 +91,17 @@ objects:
                               return it.object().status.phase == "Running"
                             }
                             bld.logs('-f')
-                         }  
+                         } 
+                      }
+                    }
+                    stage('deploy') {
+                      openshift.withCluster() {
+                        openshift.withProject() {
+                          def rm = openshift.selector("dc", templateName).rollout()
+                          openshift.selector("dc", templateName).related('pods').untilEach(1) {
+                              return (it.object().status.phase == "Running")
+                          }
+                        }
                       }
                     }
                     stage('tag') {
@@ -101,15 +111,7 @@ objects:
                         }
                       }
                     }
-                    stage('deploy') {
-                      openshift.withCluster() {
-                        openshift.withProject() {
-                          def dc = openshift.selector('dc', '${NAME}')
-                          dc.rollout()
-                        }
-                      }
-                    }
-                  }
+                }
              }
           } catch (err) {
              echo "in catch block"
